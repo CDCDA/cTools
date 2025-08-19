@@ -1,0 +1,35 @@
+//公共应用样式
+.page-main {
+  background-color: #f5f5f5;
+  padding: 20px;
+  height: calc(100% - 40px);
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+}
+
+// ::-webkit-scrollbar {
+//   width: 8px;
+//   height: 8px;
+// }
+
+// ::-webkit-scrollbar-track {
+//   background: #f1f1f1; /* 浅灰色轨道 */
+//   border-radius: 10px;
+// }
+
+// ::-webkit-scrollbar-thumb {
+//   background: #ccc;
+//   border-radius: 10px;
+//   transition: background 0.3s ease-in-out;
+// }
+
+// ::-webkit-scrollbar-thumb:hover {
+//   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* 添加一点阴影 */
+// }
+
+.el-notification {
+  width: fit-content !important;
+  min-width: 200px;
+  max-width: 300px;
+}

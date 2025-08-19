@@ -1,0 +1,60 @@
+[package]
+name = "my-vue-app"
+version = "0.1.0"
+description = "A Tauri App"
+authors = ["you"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+# The `_lib` suffix may seem redundant but it is necessary
+# to make the lib name unique and wouldn't conflict with the bin name.
+# This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
+name = "my_vue_app_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+rand = "0.8.3"
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-opener = "2"
+walkdir = "2"
+tauri-plugin-fs = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+md5 = "0.7"
+sha1 = "0.10"
+sha2 = "0.10"
+blake3 = "1.4"
+anyhow = "1.0"  # 简化错误处理
+tokio = { version = "1.0", features = ["fs"] }  # 异步文件读取
+tauri-plugin-dialog = "2"
+tauri-plugin-clipboard-manager = "2"
+tauri-plugin-shell = "2"
+sysinfo = "0.29" #系统参数获取
+tauri-plugin-process = "2"
+jwalk = "0.6"
+
+[target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
+tauri-plugin-global-shortcut = "2"
+tauri-plugin-single-instance = "2"
+
+[features]
+default = ["unstable"]
+unstable = []
+
+[profile.release]
+panic = "abort"  # 在release模式下遇到panic直接终止，而不是展开堆栈，减小体积
+codegen-units = 1 # 减少codegen单元，增加优化时间，但能生成更小的二进制文件
+lto = true      # 开启链接时优化 (Link Time Optimization)，显著减小体积
+opt-level = "s"  # 优化级别，'s'或'z'都表示优先考虑体积大小，而不是速度'3'
+strip = true     # 去除二进制文件中的符号信息
+
+[source.crates-io]
+replace-with = 'ustc'
+
+[source.ustc]
+registry = "https://mirrors.ustc.edu.cn/crates.io-index"
